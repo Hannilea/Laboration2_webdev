@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/Users/hanni/.nuget/packages/": {}
+    "/Users/khadijorahmoa/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/hanni/Library/CloudStorage/OneDrive-UniversityofBorås/webdev/TownSquare/TownSquare.csproj",
+      "projectUniqueName": "/Users/khadijorahmoa/Systemarkitekturprogrammet/År2/Utveckling av Webbapplikationer/Laboration2_webdev/TownSquare.csproj",
       "projectName": "TownSquare",
-      "projectPath": "/Users/hanni/Library/CloudStorage/OneDrive-UniversityofBorås/webdev/TownSquare/TownSquare.csproj",
-      "packagesPath": "/Users/hanni/.nuget/packages/",
-      "outputPath": "/Users/hanni/Library/CloudStorage/OneDrive-UniversityofBorås/webdev/TownSquare/obj/",
+      "projectPath": "/Users/khadijorahmoa/Systemarkitekturprogrammet/År2/Utveckling av Webbapplikationer/Laboration2_webdev/TownSquare.csproj",
+      "packagesPath": "/Users/khadijorahmoa/.nuget/packages/",
+      "outputPath": "/Users/khadijorahmoa/Systemarkitekturprogrammet/År2/Utveckling av Webbapplikationer/Laboration2_webdev/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/hanni/.nuget/NuGet/NuGet.Config"
+        "/Users/khadijorahmoa/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -44,7 +44,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -60,20 +60,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.14, 8.0.14]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[8.0.14, 8.0.14]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.14, 8.0.14]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -82,7 +68,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
