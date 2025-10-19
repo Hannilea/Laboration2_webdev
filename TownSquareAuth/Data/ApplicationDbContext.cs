@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TownSquareAuth.Data.Migrations;
 using TownSquareAuth.Models;
 
 namespace TownSquareAuth.Data;
 
-public class ApplicationDbContext : IdentityDbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -13,4 +12,6 @@ public class ApplicationDbContext : IdentityDbContext
     }
 
     public DbSet<Event> Events { get; set; }
+    public DbSet<EventRSVP> EventRSVPs { get; set; }
+
 }
