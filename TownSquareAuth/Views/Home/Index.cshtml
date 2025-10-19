@@ -2,7 +2,42 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mb-5">
+    <h1 class="display-4">Welcome to TownSquare!</h1>
+    <p>Discover, join, and create events in your community.</p>
+    <a class="btn btn-primary" asp-controller="Events" asp-action="Index">Browse Events</a>
 </div>
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">My Events</h5>
+                <p class="card-text">See all events you created.</p>
+                <a class="btn btn-outline-primary" asp-controller="Events" asp-action="MyEvents">Go</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">Create Event</h5>
+                <p class="card-text">Add a new event to share with the community.</p>
+                <a class="btn btn-outline-success" asp-controller="Events" asp-action="Create">Create</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">Upcoming Events</h5>
+                <p class="card-text">Check the next few events you might want to join.</p>
+                <a class="btn btn-outline-info" asp-controller="Events" asp-action="Index">View Events</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <partial name="_NotificationsPartial" />
+}

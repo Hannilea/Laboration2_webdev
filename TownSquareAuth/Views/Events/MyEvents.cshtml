@@ -1,0 +1,57 @@
+@model IEnumerable<TownSquareAuth.Models.Event>
+
+@{
+    ViewData["Title"] = "My Events";
+}
+@await Html.PartialAsync("_NotificationsPartial")
+
+<h1>My Events</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New Event</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to All Events</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p>You haven't created any events yet.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ev in Model)
+            {
+                <tr>
+                    <td>@ev.Title</td>
+                    <td>@ev.Date.ToShortDateString()</td>
+                    <td>@ev.Time</td>
+                    <td>@ev.Location</td>
+                    <td>@ev.Category</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@ev.Id" class="btn btn-primary btn-sm">Details</a>
+                        <a asp-action="Edit" asp-route-id="@ev.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@ev.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</a>
+
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

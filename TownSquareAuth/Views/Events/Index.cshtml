@@ -5,9 +5,17 @@
 }
 
 <h1>Events</h1>
+@Html.AntiForgeryToken() 
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New Event</a>
+</p>
+<p>
+    Sort by: 
+    <a asp-action="Index" asp-route-sortOrder="date_asc">Date ↑</a> |
+    <a asp-action="Index" asp-route-sortOrder="date_desc">Date ↓</a> |
+    <a asp-action="Index" asp-route-sortOrder="attending_asc">Fewest attending</a> |
+    <a asp-action="Index" asp-route-sortOrder="attending_desc">Most attending</a>
 </p>
 
 <table class="table">
@@ -31,11 +39,18 @@
             <td>@item.Location</td>
             <td>@item.Category</td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
     }
     </tbody>
 </table>
+<p>
+    <a asp-action="MyEvents" class="btn btn-primary">My Events</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</a>
+</p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

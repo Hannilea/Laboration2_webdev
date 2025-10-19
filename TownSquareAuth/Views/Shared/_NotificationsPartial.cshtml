@@ -1,0 +1,53 @@
+@using TownSquareAuth.Models
+@using TownSquareAuth.Data
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject ApplicationDbContext DbContext
+
+@functions {
+    // Hämta notifications asynkront
+    public async Task<List<string>> GetNotificationsAsync()
+    {
+        var notifications = new List<string>();
+        var user = await UserManager.GetUserAsync(User);
+        if (user != null)
+        {
+            // Hämta alla events som användaren skapat
+            var events = await DbContext.Events
+                .Where(e => e.ApplicationUserId == user.Id)
+                .Include(e => e.RSVPs)
+                .ToListAsync();
+
+            // Samla notifications
+            foreach (var ev in events)
+            {
+                if (ev.Notifications != null)
+                    notifications.AddRange(ev.Notifications);
+            }
+        }
+        return notifications;
+    }
+}
+
+@{
+    var notifications = await GetNotificationsAsync();
+}
+
+@if (notifications.Any())
+{
+    <div class="alert alert-info">
+        <h5>Notifications</h5>
+        <form asp-controller="Events" asp-action="ClearNotifications" method="post">
+            <button type="submit" class="btn btn-sm btn-secondary mb-2">Mark all as read</button>
+        </form>
+        <ul>
+            @foreach (var note in notifications)
+            {
+                <li>@note</li>
+            }
+        </ul>
+    </div>
+}
