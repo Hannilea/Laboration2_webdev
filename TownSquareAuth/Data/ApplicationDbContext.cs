@@ -3,13 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using TownSquareAuth.Data.Migrations;
 using TownSquareAuth.Models;
 
-namespace TownSquareAuth.Data;
-
-public class ApplicationDbContext : IdentityDbContext
+namespace TownSquareAuth.Data
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
+
+    public class ApplicationDbContext : IdentityDbContext
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+
+        }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<EventRSVP> EventRSVPs { get; set; }
+        public DbSet <Notification> Notifications { get; set; }
     }
 
     public DbSet<Event> Events { get; set; }

@@ -16,5 +16,8 @@ namespace TownSquareAuth.Models
         public string Location { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
 
+        
+        public ICollection <EventRSVP> RSVPs { get; set; }
+
     }
 }
