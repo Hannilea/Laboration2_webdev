@@ -254,7 +254,7 @@ namespace TownSquareAuth.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("TownSquareAuth.Models.EventRSVP", b =>
@@ -279,7 +279,7 @@ namespace TownSquareAuth.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("EventRSVPs");
+                    b.ToTable("EventRSVPs", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

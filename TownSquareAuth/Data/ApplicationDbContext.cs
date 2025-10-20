@@ -12,7 +12,5 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     }
     public DbSet<Event> Events { get; set; }
-    public DbSet<EventRSVP> EventRSVPs { get; set; }
-    public DbSet <Notification> Notifications { get; set; }
-    
+    public DbSet<EventRSVP> EventRSVPs { get; set; }    
 }

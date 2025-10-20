@@ -66,8 +66,8 @@ namespace TownSquareAuth.Controllers
             return View();
         }
 
-        [Authorize]
         //post: events/Create
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Event ev)
@@ -134,8 +134,8 @@ namespace TownSquareAuth.Controllers
         }
 
         //get: event/delete
-
-       public async Task<IActionResult> Delete(int? id)
+        [Authorize]
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
 
@@ -144,12 +144,13 @@ namespace TownSquareAuth.Controllers
 
             var user = await _userManager.GetUserAsync(User);
             if (ev.ApplicationUserId != user.Id)
-                return Forbid(); 
+                return Forbid();
 
             return View(ev);
         }
 
-        // POST: Events/Delete/5
+        // POST: Events/Delete
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
@@ -166,6 +167,7 @@ namespace TownSquareAuth.Controllers
             return RedirectToAction(nameof(MyEvents));
         }
 
+        // RSVP
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -181,7 +183,6 @@ namespace TownSquareAuth.Controllers
 
             if (ev == null) return NotFound();
 
-            // Event creator kan inte RSVPa
             if (user.Id == ev.ApplicationUserId)
                 return Forbid();
 
