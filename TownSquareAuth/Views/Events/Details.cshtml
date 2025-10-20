@@ -2,12 +2,22 @@
 
 @{
     ViewData["Title"] = "Event Details";
+
+    var userId = User.Identity.IsAuthenticated 
+                 ? User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value 
+                 : null;
+
+    var userRSVP = userId != null 
+        ? Model.RSVPs.FirstOrDefault(r => r.ApplicationUserId == userId && r.IsAttending) 
+        : null;
+
+    var isOwner = userId == Model.ApplicationUserId;
 }
 
-<h1>Event Details</h1>
+<h1>@Model.Title</h1>
+
 
 <div>
-    <h4>@Model.Title</h4>
     <p><strong>Description:</strong> @Model.Description</p>
     <p><strong>Date:</strong> @Model.Date.ToShortDateString()</p>
     <p><strong>Time:</strong> @Model.Time</p>
@@ -15,7 +25,66 @@
     <p><strong>Category:</strong> @Model.Category</p>
 </div>
 
+<h3>RSVP</h3>
+
+@if (User.Identity.IsAuthenticated && !isOwner)
+{
+    <form asp-action="RSVP" method="post">
+        <input type="hidden" name="eventId" value="@Model.Id" />
+        @Html.AntiForgeryToken() 
+
+        @if (userRSVP == null)
+        {
+            <button type="submit" name="isAttending" value="true" class="btn btn-success">
+                RSVP Yes
+            </button>
+            <button type="submit" name="isAttending" value="false" class="btn btn-danger" disabled>
+                Cancel RSVP
+            </button>
+        }
+        else
+        {
+            <button type="submit" name="isAttending" value="true" class="btn btn-success" disabled>
+                RSVP Yes
+            </button>
+            <button type="submit" name="isAttending" value="false" class="btn btn-danger">
+                Cancel RSVP
+            </button>
+        }
+    </form>
+
+    <p><strong>Who RSVPed:</strong></p>
+    <ul>
+        @foreach(var rsvp in Model.RSVPs.Where(r => r.IsAttending))
+        {
+            <li>@rsvp.ApplicationUser.UserName</li>
+        }
+    </ul>
+}
+else if (isOwner)
+{
+    <p><em>You are the event creator, RSVP not required.</em></p>
+    <p><strong>Who RSVPed:</strong></p>
+    <ul>
+        @foreach(var rsvp in Model.RSVPs.Where(r => r.IsAttending))
+        {
+            <li>@rsvp.ApplicationUser.UserName</li>
+        }
+    </ul>
+}
+else
+{
+    <p><strong>Total RSVPs:</strong> @Model.RSVPs.Count(r => r.IsAttending)</p>
+    <p><a href="/Identity/Account/Login">Log in</a> to RSVP.</p>
+}
+
 <p>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    <a asp-action="MyEvents" class="btn btn-secondary">My Events</a>
+    <a asp-action="Index" class="btn btn-secondary">All Events</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Home</a>
+
 </p>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

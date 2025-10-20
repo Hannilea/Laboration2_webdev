@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace TownSquareAuth.Data.Migrations
+namespace TownSquareAuth.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class updateEventModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

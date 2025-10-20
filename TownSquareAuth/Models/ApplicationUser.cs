@@ -2,18 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace TownSquareAuth.Models
 {
-    public class ApplicationUser
+    public class ApplicationUser : IdentityUser
     {
-        public int UserID { get; set; }
-        public string Name { get; set; }
 
-
-        public ICollection<Event> Events { get; set; }
-       public ICollection<EventRSVP> RSVPs { get; set; }
-
-        
+        public string? FullName { get; set; } = string.Empty;
     }
 }

@@ -1,21 +1,18 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TownSquareAuth.Data.Migrations;
 using TownSquareAuth.Models;
 
-namespace TownSquareAuth.Data
+namespace TownSquareAuth.Data;
+
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
 
-    public class ApplicationDbContext : IdentityDbContext
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
 
-        }
-        public DbSet<Event> Events { get; set; }
-        public DbSet<EventRSVP> EventRSVPs { get; set; }
-        public DbSet <Notification> Notifications { get; set; }
     }
-
     public DbSet<Event> Events { get; set; }
+    public DbSet<EventRSVP> EventRSVPs { get; set; }
+    public DbSet <Notification> Notifications { get; set; }
+    
 }
