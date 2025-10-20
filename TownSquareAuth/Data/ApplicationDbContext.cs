@@ -11,6 +11,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
 
     }
-    public DbSet<Event> Events { get; set; }
-    public DbSet<EventRSVP> EventRSVPs { get; set; }    
+    public DbSet<Event> Events { get; set; } = null!;
+    public DbSet<EventRSVP> EventRSVPs { get; set; }  = null!;
 }
