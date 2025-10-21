@@ -47,20 +47,21 @@ namespace TownSquareAuth.Controllers
             else
             {
 
-                // Hämta användarens event
-                var userEvents = _db.Events.Where(e => e.ApplicationUserId == user.Id);
+                // Hämta användarens event från databasen
+                var userEvents = await _db.Events
+                    .Where(e => e.ApplicationUserId == user.Id)
+                    .ToListAsync();
 
                 foreach (var ev in userEvents)
                 {
                     ev.ApplicationUserId = null; // Koppla bort användaren från eventet
-                    ev.ApplicationUser = "Deleted User"; // Uppdatera organisatörens namn
-                    // // Ta bort alla RSVP kopplade till eventet
-                    // var rsvps = _db.EventRSVPs.Where(r => r.EventId == ev.Id);
-                    // _db.EventRSVPs.RemoveRange(rsvps);
 
-                    // // Ta bort eventet
-                    // _db.Events.Remove(ev);
                 }
+
+                var userRSVPs = await _db.EventRSVPs  
+                    .Where(r => r.ApplicationUserId == user.Id)
+                    .ToListAsync();
+                _db.EventRSVPs.RemoveRange(userRSVPs);
 
                 //Spara andringar i databasen
                 await _db.SaveChangesAsync();

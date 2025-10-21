@@ -39,7 +39,7 @@
             <td>@item.Time</td>
             <td>@item.Location</td>
             <td>@item.Category</td>
-            <td>@(item.ApplicationUser != null ? item.ApplicationUser.Username : "Deleted User")</td>
+            <td>@(item.ApplicationUser != null ? item.ApplicationUser.UserName : "Deleted User")</td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
