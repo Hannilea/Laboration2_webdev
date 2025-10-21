@@ -12,7 +12,7 @@ Technologies Used:
 
 Feartures
 1. Event Management
-- CRUD Operations: Users can create, read, update, and delete their own events.
+- CRUD Operations: Register Users can create, read, update, and delete their own events.
 - Event Details: Events include title, description, date, time, location, and category.
 - Filter: Users can filter events by totals attending or date.
 - Anonymous can views the event, how many person gonna join the event, but not RSVP to the events, can either create och edit the events
@@ -58,6 +58,8 @@ To run this project locally, you 'll need:
    dotnet ef database update
 5. Running the application
    dotnet run
+
+
 
 
 
