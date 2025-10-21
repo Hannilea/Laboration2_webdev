@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Events Management";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titel</th>
+            <th>Creator</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@(item.ApplicationUser != null ? item.ApplicationUser.UserName : "Deleted User")</td>
+                <td>@item.Date.ToShortDateString()</td>
+                <td>
+                 <form asp-action="DeleteEvent" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?');">
+                    Delete</button>
+                </form>
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
