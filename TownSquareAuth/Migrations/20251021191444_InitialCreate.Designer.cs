@@ -11,7 +11,7 @@ using TownSquareAuth.Data;
 namespace TownSquareAuth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251021105203_InitialCreate")]
+    [Migration("20251021191444_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -339,8 +339,9 @@ namespace TownSquareAuth.Migrations
             modelBuilder.Entity("TownSquareAuth.Models.Event", b =>
                 {
                     b.HasOne("TownSquareAuth.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                        .WithMany("Events")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("ApplicationUser");
                 });
@@ -348,7 +349,7 @@ namespace TownSquareAuth.Migrations
             modelBuilder.Entity("TownSquareAuth.Models.EventRSVP", b =>
                 {
                     b.HasOne("TownSquareAuth.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("EventRSVPs")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -362,6 +363,13 @@ namespace TownSquareAuth.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Event");
+                });
+
+            modelBuilder.Entity("TownSquareAuth.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("EventRSVPs");
+
+                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("TownSquareAuth.Models.Event", b =>
