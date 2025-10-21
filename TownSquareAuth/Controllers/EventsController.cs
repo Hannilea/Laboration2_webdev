@@ -28,7 +28,7 @@ namespace TownSquareAuth.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index(string sortOrder)
         {
-            var events = _context.Events
+            var events = _context.Events.Include(e => e.ApplicationUser)
                          .Include(e => e.RSVPs)
                          .Where(e => e.Date >= DateTime.Today) 
                          .AsQueryable();
@@ -239,7 +239,7 @@ namespace TownSquareAuth.Controllers
             if (user == null) return Unauthorized();
 
             // Hämta alla events som skapats av den inloggade användaren
-            var myEvents = await _context.Events
+            var myEvents = await _context.Events.Include(e => e.ApplicationUser) 
                 .Where(e => e.ApplicationUserId == user.Id)
                 .ToListAsync();
 
