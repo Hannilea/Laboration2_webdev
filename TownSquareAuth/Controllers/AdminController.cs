@@ -78,12 +78,6 @@ namespace TownSquareAuth.Controllers
                 return RedirectToAction("Users");
             }
         }
-        // [HttpGet]
-        // public async Task<IActionResult> TestRole()
-        // {
-        //     var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
-        //     var roles = await _userManager.GetRolesAsync(currentUser);
-        //     return Content($"User: {currentUser.UserName} Roles: {string.Join(", ", roles)}");
-        // }
+      
     }
 }
