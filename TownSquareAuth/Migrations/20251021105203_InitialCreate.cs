@@ -166,11 +166,11 @@ namespace TownSquareAuth.Migrations
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Time = table.Column<string>(type: "TEXT", nullable: false),
+                    Time = table.Column<TimeSpan>(type: "TEXT", nullable: false),
                     Location = table.Column<string>(type: "TEXT", nullable: false),
                     Category = table.Column<string>(type: "TEXT", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "TEXT", nullable: false),
-                    Notifications = table.Column<string>(type: "TEXT", nullable: false)
+                    ApplicationUserId = table.Column<string>(type: "TEXT", nullable: true),
+                    Notifications = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -179,8 +179,7 @@ namespace TownSquareAuth.Migrations
                         name: "FK_Events_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

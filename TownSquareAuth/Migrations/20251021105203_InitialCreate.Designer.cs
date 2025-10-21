@@ -11,8 +11,8 @@ using TownSquareAuth.Data;
 namespace TownSquareAuth.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251018222516_UpdateEventTimeToTimeSpan")]
-    partial class UpdateEventTimeToTimeSpan
+    [Migration("20251021105203_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -226,7 +226,6 @@ namespace TownSquareAuth.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Category")
@@ -245,7 +244,6 @@ namespace TownSquareAuth.Migrations
                         .HasColumnType("TEXT");
 
                     b.PrimitiveCollection<string>("Notifications")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<TimeSpan>("Time")
@@ -342,9 +340,7 @@ namespace TownSquareAuth.Migrations
                 {
                     b.HasOne("TownSquareAuth.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
                 });

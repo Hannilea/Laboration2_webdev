@@ -29,8 +29,9 @@ namespace TownSquareAuth.Controllers
         public async Task<IActionResult> Index(string sortOrder)
         {
             var events = _context.Events
-                                 .Include(e => e.RSVPs)
-                                 .AsQueryable();
+                         .Include(e => e.RSVPs)
+                         .Where(e => e.Date >= DateTime.Today) 
+                         .AsQueryable();
 
             switch(sortOrder)
             {
