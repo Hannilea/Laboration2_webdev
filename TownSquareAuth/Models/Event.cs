@@ -40,6 +40,7 @@ namespace TownSquareAuth.Models
 
         public List<string>? Notifications { get; set; } = new List<string>();
 
+
     }
     
     

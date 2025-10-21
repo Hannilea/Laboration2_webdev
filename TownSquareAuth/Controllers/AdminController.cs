@@ -47,18 +47,21 @@ namespace TownSquareAuth.Controllers
             else
             {
 
-                // Hämta användarens event
-                var userEvents = _db.Events.Where(e => e.ApplicationUserId == user.Id);
+                // Hämta användarens event från databasen
+                var userEvents = await _db.Events
+                    .Where(e => e.ApplicationUserId == user.Id)
+                    .ToListAsync();
 
                 foreach (var ev in userEvents)
                 {
-                    // Ta bort alla RSVP kopplade till eventet
-                    var rsvps = _db.EventRSVPs.Where(r => r.EventId == ev.Id);
-                    _db.EventRSVPs.RemoveRange(rsvps);
+                    ev.ApplicationUserId = null; // Koppla bort användaren från eventet
 
-                    // Ta bort eventet
-                    _db.Events.Remove(ev);
                 }
+
+                var userRSVPs = await _db.EventRSVPs  
+                    .Where(r => r.ApplicationUserId == user.Id)
+                    .ToListAsync();
+                _db.EventRSVPs.RemoveRange(userRSVPs);
 
                 //Spara andringar i databasen
                 await _db.SaveChangesAsync();
@@ -75,12 +78,12 @@ namespace TownSquareAuth.Controllers
                 return RedirectToAction("Users");
             }
         }
-        [HttpGet]
-        public async Task<IActionResult> TestRole()
-        {
-            var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
-            var roles = await _userManager.GetRolesAsync(currentUser);
-            return Content($"User: {currentUser.UserName} Roles: {string.Join(", ", roles)}");
-        }
+        // [HttpGet]
+        // public async Task<IActionResult> TestRole()
+        // {
+        //     var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+        //     var roles = await _userManager.GetRolesAsync(currentUser);
+        //     return Content($"User: {currentUser.UserName} Roles: {string.Join(", ", roles)}");
+        // }
     }
 }
