@@ -9,7 +9,11 @@ namespace TownSquareAuth.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public int ID { get; set; }
 
         public string? FullName { get; set; } = string.Empty;
+
+        public ICollection<Event>? Events { get; set; }
+        public ICollection <EventRSVP>? EventRSVPs { get; set; }
     }
 }

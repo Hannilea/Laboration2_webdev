@@ -52,12 +52,14 @@ namespace TownSquareAuth.Controllers
 
                 foreach (var ev in userEvents)
                 {
-                    // Ta bort alla RSVP kopplade till eventet
-                    var rsvps = _db.EventRSVPs.Where(r => r.EventId == ev.Id);
-                    _db.EventRSVPs.RemoveRange(rsvps);
+                    ev.ApplicationUserId = null; // Koppla bort användaren från eventet
+                    ev.ApplicationUser = "Deleted User"; // Uppdatera organisatörens namn
+                    // // Ta bort alla RSVP kopplade till eventet
+                    // var rsvps = _db.EventRSVPs.Where(r => r.EventId == ev.Id);
+                    // _db.EventRSVPs.RemoveRange(rsvps);
 
-                    // Ta bort eventet
-                    _db.Events.Remove(ev);
+                    // // Ta bort eventet
+                    // _db.Events.Remove(ev);
                 }
 
                 //Spara andringar i databasen
@@ -75,12 +77,12 @@ namespace TownSquareAuth.Controllers
                 return RedirectToAction("Users");
             }
         }
-        [HttpGet]
-        public async Task<IActionResult> TestRole()
-        {
-            var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
-            var roles = await _userManager.GetRolesAsync(currentUser);
-            return Content($"User: {currentUser.UserName} Roles: {string.Join(", ", roles)}");
-        }
+        // [HttpGet]
+        // public async Task<IActionResult> TestRole()
+        // {
+        //     var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+        //     var roles = await _userManager.GetRolesAsync(currentUser);
+        //     return Content($"User: {currentUser.UserName} Roles: {string.Join(", ", roles)}");
+        // }
     }
 }
