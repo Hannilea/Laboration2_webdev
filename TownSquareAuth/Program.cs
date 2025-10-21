@@ -7,8 +7,7 @@ using TownSquareAuth.Data;
 using TownSquareAuth.Models;
 using System.Threading.Tasks;
 using System.Linq;
-
-
+using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
+
+builder.Services.AddHttpClient();
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)

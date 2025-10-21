@@ -5,6 +5,8 @@ using TownSquareAuth.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Http;
+
 
 namespace TownSquareAuth.Controllers
 {
@@ -13,10 +15,13 @@ namespace TownSquareAuth.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public EventsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public EventsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IHttpClientFactory httpClientFactory)
         {
             _context = context;
             _userManager = userManager;
+            _httpClientFactory = httpClientFactory;
         }
 
         //get: events
@@ -57,6 +62,9 @@ namespace TownSquareAuth.Controllers
                             .ThenInclude(r => r.ApplicationUser)
                             .FirstOrDefaultAsync(e => e.Id == id);
             if (ev == null) return NotFound();
+
+            ViewBag.EventImage = $"https://picsum.photos/seed/{ev.Id}/600/400";
+
             return View(ev);
         }
 
@@ -124,7 +132,10 @@ namespace TownSquareAuth.Controllers
                 dbEvent.Title = ev.Title;
                 dbEvent.Description = ev.Description;
                 dbEvent.Date = ev.Date;
-                // update other fields if needed
+                dbEvent.Time = ev.Time;
+                dbEvent.Location = ev.Location;
+                dbEvent.Category = ev.Category;
+
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(MyEvents));
