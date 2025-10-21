@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Http;
-
+using System.Text.Json;
 
 namespace TownSquareAuth.Controllers
 {
@@ -14,8 +14,8 @@ namespace TownSquareAuth.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-
         private readonly IHttpClientFactory _httpClientFactory;
+
 
         public EventsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IHttpClientFactory httpClientFactory)
         {
