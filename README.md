@@ -44,8 +44,9 @@ To run this project locally, you 'll need:
 - SQLite
 
 1. Clone the repository
-   git clone
-   cd
+   git clone https://github.com/Hannilea/Laboration2_webdev.git
+   cd Laboration2_webdev
+   cd TownSquareAuth
 2. Install Dependencies
    Before running the application, run the following command to restore dependencies (NuGet Packages)
    dotnet restore
