@@ -58,7 +58,7 @@ namespace TownSquareAuth.Controllers
 
                 }
 
-                var userRSVPs = await _db.EventRSVPs  
+                var userRSVPs = await _db.EventRSVPs
                     .Where(r => r.ApplicationUserId == user.Id)
                     .ToListAsync();
                 _db.EventRSVPs.RemoveRange(userRSVPs);
@@ -78,12 +78,37 @@ namespace TownSquareAuth.Controllers
                 return RedirectToAction("Users");
             }
         }
-        // [HttpGet]
-        // public async Task<IActionResult> TestRole()
-        // {
-        //     var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
-        //     var roles = await _userManager.GetRolesAsync(currentUser);
-        //     return Content($"User: {currentUser.UserName} Roles: {string.Join(", ", roles)}");
-        // }
+
+        public async Task<IActionResult> Events()
+        {
+            var events = await _db.Events
+                .Include(e => e.ApplicationUser)
+                .ToListAsync();
+            
+            
+            return View(events);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteEvent(int id)
+        {
+            var ev = await _db.Events
+                .Include(e => e.RSVPs) 
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (ev == null) return NotFound();
+
+            _db.EventRSVPs.RemoveRange(ev.RSVPs);
+
+            _db.Events.Remove(ev);
+
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction("Events");
+        }
+        
+         
+        
     }
 }
