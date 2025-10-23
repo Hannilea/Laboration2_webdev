@@ -40,7 +40,7 @@ Feartures
 Setup introductions
 To run this project locally, you 'll need:
 - Vs, VScode or any preferred IDE
-- .NET 6.0 or later
+- .NET 9.0 or later
 - SQLite
 
 1. Clone the repository
