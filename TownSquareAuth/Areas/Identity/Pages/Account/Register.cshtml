@@ -10,10 +10,10 @@
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             
-            <hr />
+           
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.FullName" class="form-control"/>
+                <input asp-for="Input.FullName" class="form-control" placeholder="Full Name" />
                 <label asp-for="Input.FullName">Full Name</label>
                 <span asp-validation-for="Input.FullName" class="text-danger"></span>
             </div>
