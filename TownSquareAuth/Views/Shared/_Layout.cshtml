@@ -26,9 +26,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+
+                        @* Knapp visas endast om admin är inloggad *@
                         
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -37,6 +36,9 @@
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Admin" asp-action="Users">User Management</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Admin" asp-action="Events">Events Management</a>
                                 </li>
                             }
                         }
@@ -55,11 +57,8 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - TownSquareAuth - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - TownSquareAuth
         </div>
-    <li class="nav-item">
-    <a class="nav-link text-white" asp-controller="Events" asp-action="MyEvents">My Events</a>
-    </li>
 
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
