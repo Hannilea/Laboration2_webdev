@@ -9,6 +9,7 @@
     <title>@ViewData["Title"] - TownSquareAuth</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TownSquareAuth.styles.css" asp-append-version="true" />
 </head>
@@ -24,21 +25,24 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house-door"></i> Home
+                            </a>
                         </li>
 
-                        @* Knapp visas endast om admin är inloggad *@
-                        
                         @if (SignInManager.IsSignedIn(User))
                         {
-                           
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Admin" asp-action="Users">User Management</a>
+                                    <a class="nav-link text-dark" asp-controller="Admin" asp-action="Users">
+                                        <i class="bi bi-people"></i> User Management
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Admin" asp-action="Events">
+                                        <i class="bi bi-calendar-event"></i> Events Management
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Admin" asp-action="Events">Events Management</a>
@@ -46,6 +50,7 @@
                             }
                         }
                     </ul>
+
 
                     <partial name="_LoginPartial" />
                 </div>
@@ -60,7 +65,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - TownSquareAuth - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - TownSquareAuth
         </div>
 
     </footer>
